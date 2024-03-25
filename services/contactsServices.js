@@ -52,3 +52,18 @@ export async function addContact(name, email, phone) {
     throw error;
   }
 }
+
+export const updateContactById = async (id, data) => {
+  try {
+    const contacts = await listContacts();
+    const index = contacts.findIndex(item => item.id === id);
+    if (index === -1) {
+        return null;
+    }
+    contacts[index] = { ...contacts[index], ...data };
+    await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+    return contacts[index];
+  } catch (error) {
+    throw error;
+  }
+}
