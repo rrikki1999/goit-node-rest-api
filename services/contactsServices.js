@@ -41,9 +41,10 @@ export async function removeContact(contactId) {
   }
 }
 
-export async function addContact(name, email, phone) {
+
+export async function addContact(contactData) { 
   try {
-    const newContact = { id: Date.now(), name, email, phone };
+    const newContact = { id: Date.now().toString(), ...contactData };
     const contacts = await listContacts();
     const updatedContacts = [...contacts, newContact];
     await fs.writeFile(contactsPath, JSON.stringify(updatedContacts, null, 2));
@@ -52,6 +53,7 @@ export async function addContact(name, email, phone) {
     throw error;
   }
 }
+
 
 export const updateContactById = async (id, data) => {
   try {
