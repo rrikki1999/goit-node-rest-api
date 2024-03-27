@@ -44,7 +44,8 @@ export const deleteContact = async (req, res, next) => {
     if (!result) {
         throw HttpError(404, `A contact with such id=${id} was not found`);
       }
-      res.status(200).json({ message: "Delete Success" });
+      // res.status(200).json({ message: "Delete Success" });
+      res.status(200).json(result);
   } catch (error) {
     next(error);
   }
